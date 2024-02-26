@@ -14,8 +14,8 @@ class Bicicletta {
         colore="Bianco";
     }
     Bicicletta(int r, string c) {
-    raggio = r;
-    colore = c;
+        raggio = r;
+        colore = c;
     }
     void presentati() {
         cout << "Buongiorno, sono una bici di colore " << colore << " e con le ruote " << raggio << "!" << endl;
