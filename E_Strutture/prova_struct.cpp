@@ -23,7 +23,6 @@ typedef struct {int uno; int due;} COPPIA;
 
 int main()
 {
-
   struct persona gigi, gigietto;
   COPPIA coppia_eta;
   coppia_eta.uno = 17;
