@@ -9,7 +9,7 @@ class Bicicletta {
   public:
     int raggio;
     string colore;
-    Bicicletta() {
+    Bicicletta() { 
         raggio=10;
         colore="Bianco";
     }
