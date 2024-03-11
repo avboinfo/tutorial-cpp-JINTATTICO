@@ -1,20 +1,20 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-class mastermind
-{
+#include <string>
+
+class mastermind {
 private:
     int numero_mosse;
     std::string ultima_mossa;
-
     static const int DIM_GIOCATA_VALIDA = 4;
     int mossa_valida[DIM_GIOCATA_VALIDA];
     int codice_segreto[DIM_GIOCATA_VALIDA];
 
-    bool sanifica_input(){
+    bool sanifica_input() {
         if (DIM_GIOCATA_VALIDA != ultima_mossa.size())
             return false;
-        for(int i = 0; i < ultima_mossa.size(); i++){
+        for(int i = 0; i < ultima_mossa.size(); i++) {
             char c = ultima_mossa[i];
 
             if(c >='0' && c <= '9')
@@ -27,52 +27,51 @@ private:
         return true;
     }
 
-    void genera_codice_segreto(){
+    void genera_codice_segreto() {
         srand(time(NULL));
-        for(int i = 0; i < DIM_GIOCATA_VALIDA; i++){
-            codice_segreto[i] = rand () & 10;
+        for(int i = 0; i < DIM_GIOCATA_VALIDA; i++) {
+            codice_segreto[i] = rand () % 10;
         }
+        for(int i = 0; i < DIM_GIOCATA_VALIDA; i++) {
+            std::cout << codice_segreto[i] << " ";
+        }
+        std::cout << std::endl;
     }
+
 
 public:
-
-    mastermind(/* args */){
+    mastermind() {
+        genera_codice_segreto();
         numero_mosse = 0;
         ultima_mossa = "";
-        genera_codice_segreto();
     };
 
-    void nuova_giocata(){
-        do{
-            std::cout << numero_mosse + 1 << ": ";
-            std::getline(std::cin, ultima_mossa);  
-        }while(!sanifica_input());
-
-        numero_mosse++;
+    void nuova_giocata() {
+        do {
+            std::cout << "Inserisci " << DIM_GIOCATA_VALIDA << " numeri: ";
+            std::cin >> ultima_mossa;  
+        } while (!sanifica_input());
+        
+        confronta_codice(mossa_valida);
     }
 
-    void risultato_mossa(){
-        int numeri_indovinati = 0;
-        int posizioni_corrette = 0;
+    void confronta_codice(int mossa[]) {
+        int strike = 0;
+        int ball = 0;
 
-    // Calcola numeri indovinati e posizioni corrette
-    for(int i = 0; i < DIM_GIOCATA_VALIDA; i++){
-        if(mossa_valida[i] == codice_segreto[i]){
-            posizioni_corrette++;
-        }
-        else{
-            for(int j = 0; j < DIM_GIOCATA_VALIDA; j++){
-                if(mossa_valida[i] == codice_segreto[j]){
-                    numeri_indovinati++;
-                    break;
+        for (int i = 0; i < DIM_GIOCATA_VALIDA; i++) {
+            if (mossa[i] == codice_segreto[i]) {
+                strike++;
+            } else {
+                for (int j = 0; j < DIM_GIOCATA_VALIDA; j++) {
+                    if (mossa[i] == codice_segreto[j]) {
+                        ball++;
+                        break;
+                    }
                 }
             }
         }
-    }
 
-    // Stampa risultato
-    std::cout << "Numeri indovinati: " << numeri_indovinati << std::endl;
-    std::cout << "Posizioni corrette: " << posizioni_corrette << std::endl;
+        std::cout << "Strike: " << strike << ", Ball: " << ball << std::endl;
     }
-
 };
