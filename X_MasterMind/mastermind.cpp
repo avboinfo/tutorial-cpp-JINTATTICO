@@ -32,6 +32,7 @@ private:
         for(int i = 0; i < DIM_GIOCATA_VALIDA; i++) {
             codice_segreto[i] = rand () % 10;
         }
+        std::cout << "Combinazione segreta --> ";
         for(int i = 0; i < DIM_GIOCATA_VALIDA; i++) {
             std::cout << codice_segreto[i] << " ";
         }
@@ -70,7 +71,6 @@ public:
                 }
                 if(mossa[i] == copia_vett[j]){
                     ball++;
-                    copia_vett[j] = -2;
                 }
             }
         }

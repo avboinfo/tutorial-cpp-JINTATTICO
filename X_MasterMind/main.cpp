@@ -3,6 +3,7 @@
 using namespace std;
 
 int main() {
+  cout << "Buongiorno al gioco del Mastermind" << endl;
   mastermind prova = mastermind();
   prova.nuova_giocata();
   static const int DIM_GIOCATA_VALIDA = 4;
