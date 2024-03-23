@@ -58,20 +58,22 @@ public:
     void confronta_codice(int mossa[]) {
         int strike = 0;
         int ball = 0;
-
+        int copia_vett[DIM_GIOCATA_VALIDA];
+        for(int i = 0; i < DIM_GIOCATA_VALIDA; i++){
+            copia_vett[i] = codice_segreto[i];
+        }
         for (int i = 0; i < DIM_GIOCATA_VALIDA; i++) {
-            if (mossa[i] == codice_segreto[i]) {
-                strike++;
-            } else {
-                for (int j = 0; j < DIM_GIOCATA_VALIDA; j++) {
-                    if (mossa[i] == codice_segreto[j]) {
-                        ball++;
-                        break;
-                    }
+            for (int j = 0; j < DIM_GIOCATA_VALIDA; j++) {
+                if (mossa[i] == copia_vett[i]) {
+                    strike++;
+                    copia_vett[i] = -2;
+                }
+                if(mossa[i] == copia_vett[j]){
+                    ball++;
+                    copia_vett[j] = -2;
                 }
             }
         }
-
         std::cout << "Strike: " << strike << ", Ball: " << ball << std::endl;
     }
 };
