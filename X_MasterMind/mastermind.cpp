@@ -142,9 +142,10 @@ public:
         std::cout << "Il numero di ball e': " << ball << std::endl;
         
     }
-    bool vittoria(){
-        if(vittoria == false && mossa_valida < 9)
-            true
+    bool vit(){
+        if(vittoria == false && mossa_valida < 9){
+            true;
+        }
     }
 
     bool puoi_continuare(){
