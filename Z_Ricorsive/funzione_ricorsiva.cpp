@@ -19,7 +19,8 @@ int main() {
         int risultato = sommaNumeri(n, m);
         cout << "La somma di tutti gli interi tra " << n << " e " << m << " è: " << risultato << endl;
     } else {
-        cout << "Il primo numero deve essere minore o uguale al secondo numero." << endl;
+        cout << "ERRORE!!!!!!!" << endl;
+        cout << "Il primo numero deve essere minore o uguale al secondo numero" << endl;
     }
     
     return 0;
