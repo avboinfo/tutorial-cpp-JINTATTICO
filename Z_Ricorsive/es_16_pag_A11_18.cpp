@@ -35,7 +35,7 @@ public:
         for(int i=0; i<11; i++){
             std::cout <<"Arrivo nuovo cliente: S o N --> ";
             std::cin >> nuovoCliente; 
-            if(nuovoCliente ==  'S'){
+            if(nuovoCliente ==  'S' || nuovoCliente == 's'){
                 servizio();
                 generaNumeroCliente();
             }
@@ -50,19 +50,22 @@ public:
     void generaNumeroCliente() {
         if (serv == 's') {
             numeroClienteSpedizione++;
+            numeroClienteTotali++;
             std::cout << "Cliente, il tuo numero per SPEDIZIONE è S" << numeroClienteSpedizione << std::endl;
         }
         else if (serv == 'r') {
             numeroClienteRicezione++;
+            numeroClienteTotali++;
             std::cout << "Cliente, il tuo numero per RICEZIONE è R" << numeroClienteRicezione << std::endl;
         }
         else if (serv == 'f') {
             numeroClienteFinanziario++;
+            numeroClienteTotali++;
             std::cout << "Cliente, il tuo numero per FINANZIARIO è F" << numeroClienteFinanziario << std::endl;
         }
         else {
             std::cout << "SERVIZIO INVALIDO" << std::endl;
-        }
+        } 
     }
 
     void clientiAttesa(){
@@ -74,36 +77,41 @@ public:
     }
 
     void chiamataCliente() {
-        char servizioChiamata;
-        std::cout << "Servizio da chiamare (s/r/f): ";
-        std::cin >> servizioChiamata;
+        while (numeroClienteTotali > 0) {
+            char servizioChiamata;
+            std::cout << "Servizio da chiamare (s/r/f): ";
+            std::cin >> servizioChiamata;
 
-        if (servizioChiamata == 's') {
-            if (numeroClienteSpedizione > 0) {
-                std::cout << "Chiamata cliente per SPEDIZIONE" << std::endl;
-                numeroClienteSpedizione--;
-
+            if (servizioChiamata == 's') {
+                if (numeroClienteSpedizione > 0) {
+                    std::cout << "Chiamata cliente per SPEDIZIONE: S" << numeroClienteSpedizione << std::endl;
+                    numeroClienteSpedizione--;
+                    numeroClienteTotali--;
+                } else {
+                    std::cout << "Nessun cliente in attesa per SPEDIZIONE" << std::endl;
+                }
+            } else if (servizioChiamata == 'r') {
+                if (numeroClienteRicezione > 0) {
+                    std::cout << "Chiamata cliente per RICEZIONE: R" << numeroClienteRicezione << std::endl;
+                    numeroClienteRicezione--;
+                    numeroClienteTotali--;
+                } else {
+                    std::cout << "Nessun cliente in attesa per RICEZIONE" << std::endl;
+                }
+            } else if (servizioChiamata == 'f') {
+                if (numeroClienteFinanziario > 0) {
+                    std::cout << "Chiamata cliente per FINANZIARIO: F" << numeroClienteFinanziario << std::endl;
+                    numeroClienteFinanziario--;
+                    numeroClienteTotali--;
+                } else {
+                    std::cout << "Nessun cliente in attesa per FINANZIARIO" << std::endl;
+                }
             } else {
-                std::cout << "Nessun cliente in attesa per SPEDIZIONE" << std::endl;
+                std::cout << "Servizio invalido" << std::endl;
             }
-        } else if (servizioChiamata == 'r') {
-            if (numeroClienteRicezione > 0) {
-                std::cout << "Chiamata cliente per RICEZIONE" << std::endl;
-                numeroClienteRicezione--;
-            } else {
-                std::cout << "Nessun cliente in attesa per RICEZIONE" << std::endl;
-            }
-        } else if (servizioChiamata == 'f') {
-            if (numeroClienteFinanziario > 0) {
-                std::cout << "Chiamata cliente per FINANZIARIO" << std::endl;
-                numeroClienteFinanziario--;
-            } else {
-                std::cout << "Nessun cliente in attesa per FINANZIARIO" << std::endl;
-            }
-        } else {
-            std::cout << "Servizio invalido" << std::endl;
         }
     }
+
 };
 
 int main() {
