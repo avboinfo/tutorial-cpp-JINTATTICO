@@ -1,23 +1,17 @@
 /*
-** BattleShip.cpp una classe per giocare alla Battaglia Navale
+** BattleShip.cpp una classe per giocare alla Battaglia DIMavale
 ** Butt Abdul Mohid - 20/04/2024
 */
-
 #include <iostream>
 #include "BattleField.cpp"
 
-using namespace std;
-
-// DIM, SHIP, MISS, HIT, VOID
-
 class BattleShip {
 
-    private:
-
+private:
     BattleField mappa;
     BattleField campo;
 
-    public:
+public:
     BattleShip() {
         mappa = BattleField(VOID);
         campo = BattleField(VOID);
@@ -29,6 +23,7 @@ class BattleShip {
 
     void play() {
 
+        /*
         // lancia 20 bombe a caso
         for (int i=0; i<20; i++) {
             int x = rand() % DIM;
@@ -39,25 +34,51 @@ class BattleShip {
                 campo.put(x,y,HIT);
             } else mappa.put(x,y,MISS);
         }
+        */
 
-        mappa.stampa();
+       while(!isGameOver()) {
+            mappa.stampa();
 
-        ask();
+            if (!playHand()) {
+                break;
+            } 
 
-        mappa.stampa();
-        campo.stampa();
+            campo.stampa();
+            
+        }
 
     }
 
-    void ask() {
-        cout << "Inserisci le coordinate di riga e colonna in cui sganciare la bomba: ";
+    bool playHand() {
+        std::cout << "Dove vuoi lanciare la bomba? (x y)";
         int x, y;
-        cin >> x;
-        cin >> y;
+        std::cin >> x;
+        std::cin >> y;
+
+        if (x <= 0 || x >= DIM || y <= 0 || y >= DIM) {
+            std::cout << "Coordinate non valide" << std::endl;
+            return false;
+        } else {
+            x--;
+            y--;
+        }
+
         if (campo.get(x,y)==SHIP) {
             mappa.put(x,y,HIT);
             campo.put(x,y,HIT);
-        } else mappa.put(x,y,MISS);
+        } else{
+            mappa.put(x,y,MISS);
+        }
+        return true;
+    }
+
+    bool isGameOver() {
+        for (int i=0; i<DIM; i++) {
+            for (int j=0; j<DIM; j++) {
+                if (campo.get(i,j)==SHIP) return false;
+            }
+        }
+        return true;
     }
 
 };
