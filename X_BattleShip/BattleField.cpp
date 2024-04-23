@@ -40,15 +40,22 @@ class BattleField {
     }
 
     void stampa() {
-        cout << endl << " ------------------------------------------------------ " << endl;
-        for (int i=0; i<DIM; i++) {
-            for (int j=0; j<DIM; j++) {
-                printf("%c ", m[i][j]);
+        cout << "   ";
+        for (int i = 0; i < DIM; ++i) {
+            cout << i + 1<< " ";
+        }
+        cout << endl;
+        for (int i = 0; i < DIM; ++i) {
+            // Stampa il numero di riga
+            cout << i + 1 << " |";
+            // Stampa il contenuto della riga
+            for (int j = 0; j < DIM; ++j) {
+                cout << m[i][j] << " ";
             }
             cout << endl;
         }
-        cout << endl << " ------------------------------------------------------ " << endl;
     }
+
 
     void bomb() {
         int x = rand() % DIM;
