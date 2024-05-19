@@ -6,7 +6,6 @@
 #include <iostream>
 using namespace std;
 
-// DIM, SHIP, MISS, HIT, VOID
 const int DIM = 10;
 const char SHIP = 'X';
 const char MISS = '.';
