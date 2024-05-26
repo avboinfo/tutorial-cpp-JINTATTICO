@@ -1,14 +1,13 @@
 #include <vector>
+#include <algorithm>
 
+int pollice_verde(int N, std::vector<int> H) {
+    std::sort(H.begin(), H.end(), std::greater<int>());
 
-using namespace std;
-
-int pollice_verde(int N, vector<int> H) {
-    int numero_uguali = 0;
-    for(int i = 0;i <N;i++){
-        if(H[i] == H[i + 1]){
-            numero_uguali ++;
-        }
+    int count = 0;
+    for (int i = 0; i < N - 1; i++) {
+        count += (H[i] > H[i + 1]);
     }
-    return numero_uguali;
+
+    return N - count;
 }
